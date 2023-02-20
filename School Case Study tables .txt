@@ -1,0 +1,31 @@
+DATABASE DESIGN:
+1.	Create a DATABASE: SCHOOL
+
+TABLES
+CREATE THE FOLLOWING THREE TABLES WITH SAME NAMES AND DATA TYPES AS PROVIDED BELOW:
+CourseMaster
+Column Name 		Data Type						Remarks
+CID					Integer							Primary Key
+CourseName			Varchar (40)					NOT NULL 
+Category			Char(1)							NULL, Basic/Medium/Advanced
+Fee					Smallmoney						NOT NULL; Fee can’t be negative
+
+
+
+StudentMaster
+Column Name 		Data Type					Remarks
+SID					TinyInt						Primary Key
+Name	        	Varchar (40)				NOT NULL
+Origin	        	Char(1)						NOT NULL, Local/Foreign
+Type	        	Char(1)						NOT NULL, UnderGraduate/Graduate
+
+
+
+
+EnrollmentMaster 
+Column Name 	    Data Type					Remarks
+CID					Integer						Foreign Key
+SID					Tinyint						Foreign Key
+DOE					DateTime					NOT NULL
+FWF					Bit							NOT NULL
+Grade				Char(1)						O/A/B/C
