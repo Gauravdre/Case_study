@@ -1,4 +1,4 @@
-USING THE School case stury TABLE LAYOUTS AS SCHEMA, WRITE T-SQL STATEMENTS FOR THE FOLLOWING REQUIREMENTS :
+USING THE School case study TABLE LAYOUTS AS SCHEMA, WRITE T-SQL STATEMENTS FOR THE FOLLOWING REQUIREMENTS :
 
 2.	List the course wise total no. of Students enrolled. Provide the information only for students of foreign origin and only if the total exceeds 10.
 IF ((
