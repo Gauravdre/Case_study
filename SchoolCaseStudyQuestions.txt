@@ -1,6 +1,7 @@
 USING THE School case study TABLE LAYOUTS AS SCHEMA, WRITE T-SQL STATEMENTS FOR THE FOLLOWING REQUIREMENTS :
 
 2.	List the course wise total no. of Students enrolled. Provide the information only for students of foreign origin and only if the total exceeds 10.
+Query :
 IF ((
 				Select Count(*) from StudentMaster
 				Where Origin = 'F') > 10)
@@ -26,6 +27,8 @@ end
 
 
 3.	List the names of the Students who have not enrolled for Java course.
+Query :
+
 Select Distinct Name 
 				from CourseMaster as CM join EnrMaster as EM 
 				on CM.CID = EM.CID
@@ -33,7 +36,7 @@ Select Distinct Name
 				on EM.SID = SM.SID
 where CourseName <> 'Java'
 
-OR
+(OR)
 
 Select Name 
 	from StudentMaster as S join 
@@ -52,6 +55,7 @@ Select Name
 
 4.	List the name of the advanced course where the enrollment by foreign students is the highest.	
 -
+Query :
 Select CourseName,Count(*) as Total_no_of_Students 
 from StudentMaster as SM join EnrMaster as EM 
 on SM.SID = EM.SID
@@ -64,6 +68,7 @@ Group By CourseName
 
 
 5.	List the names of the students who have enrolled for at least one basic course in the current month.
+Query :
 Select Name,CourseName,DOE,Category 
 from CourseMaster as CM join EnrMaster as EM
 						on CM.CID = EM.CID
@@ -77,7 +82,7 @@ where Category = 'B' and DATEDIFF(mm,DOE,GETDATE()) = 0
 
 
 6.	List the names of the Undergraduate, local students who have got a “C” grade in any basic course.
-
+Query :
 Select Name,Category,Grade,type,origin,CourseName
 from EnrMaster as E join 
 (
@@ -96,6 +101,7 @@ Where Grade= 'C' and Category= 'B'
 
 
 7.	List the names of the courses for which no student has enrolled in the month of May 2016.
+Query :
 Select CourseName,Category from CourseMaster as C Left outer join 
                                (
 								
@@ -120,6 +126,7 @@ Where F.CID IS NULL
 
 
 9.	List the most recent enrollment details with information on Student Name, Course name and age of enrollment in days.
+Query :
 select Name,CourseName,SM.SID,DOE, datediff (dd,DOE,Getdate()) as [Age of Enrolment in Days] 
            from EnrMaster as EM join CourseMaster as CM
 									on EM.CID = CM.CID
@@ -130,6 +137,7 @@ Order By  [Age of Enrolment in Days]
 
 
 10.	List the names of the Local students who have enrolled for exactly 3 basic courses. 
+Query :
 Select * from StudentMaster as SM join
 (
 Select SId,Count(*) as cnt
@@ -147,7 +155,7 @@ on SM.SID = TET.SID
 
 
 11.	List the names of the Courses enrolled by all (every) students.
-
+Query :
 select Name,CourseName
 from EnrMaster as EnrStu join StudentMaster as S
 on EnrStu.SID = S.SID
@@ -159,6 +167,7 @@ Group by CourseName,name
 
 
 12.	For those enrollments for which fee have been waived, provide the names of students who have got ‘O’ grade.
+Query :
 Select Name,FWF,Grade 
 from StudentMaster as S join 
 									(
@@ -171,7 +180,7 @@ on S.SID = O.SID
 
 
 13.	List the names of the foreign, undergraduate students who have got grade ‘C’ in any basic course.
-
+Query :
 Select CourseName,Category,Grade,Name,Origin,type 
 from CourseMaster as C join 
 								(
@@ -189,7 +198,7 @@ where Origin='F' and Type ='U' and Category = 'B'
 
 
 14.	List the course name, total no. of enrollments in the current month.
-
+Query :
 Select C.CID,CourseName,Count(C.CID) as No_of_Enrollments,Year,Month
 From 
 (
