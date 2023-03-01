@@ -117,9 +117,21 @@ Where F.CID IS NULL
 
 
 
-8.	List name, Number of Enrollments and Popularity for all Courses. Popularity has to be displayed as “High” if number of enrollments is higher than 50,  “Medium” if greater than or equal to 20 and less than 50, and “Low” if the no.  Is less than 20.
+8.	List name, Number of Enrollments and Popularity for all Courses. Popularity has to be displayed as “High” if number of enrollments is higher than 9,  “Medium” if greater than or equal to 5 and less than equal to 9, and “Low” if the no.  Is less than 5. Order by popularity desc.
 
-
+;with cte as (
+Select CourseName,Count(EM.CID) as 'number of enrollments'
+from CourseMaster CM 
+join EnrMaster EM 
+on CM.CID = EM.CID
+Group by  CourseName)
+Select CourseName as Name,
+[Number of Enrollments],
+Popularity= case when [Number of Enrollments] > 9 then 'High'
+when [Number of Enrollments] >= 5 and [Number of Enrollments]<= 9  then 'Medium'
+when [Number of Enrollments] < 5 then 'low'  end 
+from cte
+order by [Number of Enrollments] desc;
 
 
 
