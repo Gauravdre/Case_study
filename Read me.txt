@@ -1,0 +1,10 @@
+Read Me
+++++++++++++++++++++++++++++
+
+This section applies to all the files in this folder. 
+
+Generally these are Case studies which are given by various companies. 
+
+1.The case study starts with creating th e desired SQL tables , and then writing(inserting) data in the tables.
+2.Post creation of the tables the questions in each of the case studies is answered.
+3.Queries are written in  different ways as there are different ways to get the answer to a Question.
