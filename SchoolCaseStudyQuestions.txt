@@ -1,7 +1,26 @@
 USING THE School case study TABLE LAYOUTS AS SCHEMA, WRITE T-SQL STATEMENTS FOR THE FOLLOWING REQUIREMENTS :
+note :As there was limited data hence numbers might have been changed in the Query , which might also server the similar purpose. 
+
 
 2.	List the course wise total no. of Students enrolled. Provide the information only for students of foreign origin and only if the total exceeds 10.
 Query :
+
+with Cte as
+(  
+select CourseName,Count(DOE) as Enrollments from CourseMaster CM
+join EnrMaster EM
+on CM.CID = EM.CID
+join StudentMaster SM
+on EM.SID = SM.SID
+where Origin = 'F'
+group by CourseName
+)
+Select * from CTE where Enrollments > 10
+
+(OR)
+
+//The is Another way to write this Query , it displays Data if the count is less than 10.
+
 IF ((
 				Select Count(*) from StudentMaster
 				Where Origin = 'F') > 10)
@@ -56,13 +75,14 @@ Select Name
 4.	List the name of the advanced course where the enrollment by foreign students is the highest.	
 -
 Query :
-Select CourseName,Count(*) as Total_no_of_Students 
+Select top 1 CourseName,Count(*) as Total_no_of_Students 
 from StudentMaster as SM join EnrMaster as EM 
 on SM.SID = EM.SID
 join CourseMaster as CM
 on CM.CID = EM.CID
 where Origin = 'F' and Category = 'A'
 Group By CourseName
+order by Total_no_of_Students desc
 
 
 
