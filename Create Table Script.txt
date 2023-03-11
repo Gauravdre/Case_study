@@ -1,0 +1,73 @@
+-- Creating table Student master
+
+CREATE TABLE [dbo].[StudentMaster](
+	[SID] [tinyint] NOT NULL,
+	[Name] [varchar](40) NOT NULL,
+	[Origin] [char](1) NOT NULL,
+	[Type] [char](1) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[SID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[StudentMaster]  WITH CHECK ADD CHECK  (([Origin]='L' OR [Origin]='F'))
+GO
+
+ALTER TABLE [dbo].[StudentMaster]  WITH CHECK ADD CHECK  (([Type]='U' OR [Type]='G'))
+GO
+	
+	
+	
+	
+	
+-- creating table Enrollment master
+
+
+CREATE TABLE [dbo].[EnrMaster](
+	[CID] [int] NULL,
+	[SID] [tinyint] NULL,
+	[DOE] [datetime] NOT NULL,
+	[FWF] [bit] NOT NULL,
+	[Grade] [char](1) NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[EnrMaster]  WITH CHECK ADD FOREIGN KEY([CID])
+REFERENCES [dbo].[CourseMaster] ([CID])
+GO
+
+ALTER TABLE [dbo].[EnrMaster]  WITH CHECK ADD FOREIGN KEY([SID])
+REFERENCES [dbo].[StudentMaster] ([SID])
+GO
+
+ALTER TABLE [dbo].[EnrMaster]  WITH CHECK ADD CHECK  (([Grade]='C' OR [Grade]='B' OR [Grade]='A' OR [Grade]='O'))
+GO
+
+
+
+
+
+
+
+-- Creating table Course Master 
+
+
+CREATE TABLE [dbo].[CourseMaster](
+	[CID] [int] NOT NULL,
+	[CourseName] [varchar](40) NOT NULL,
+	[Category] [char](1) NULL,
+	[Fee] [smallmoney] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[CID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[CourseMaster]  WITH CHECK ADD CHECK  (([Category]='B' OR [Category]='M' OR [Category]='A'))
+GO
+
+ALTER TABLE [dbo].[CourseMaster]  WITH CHECK ADD CHECK  (([Fee]>=(0)))
+GO
